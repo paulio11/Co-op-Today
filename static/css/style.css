@@ -1,0 +1,648 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #282828;
+    font-size: 14px;
+    line-height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* landing page */
+
+#landing {
+    background-color: #326bb7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#landing h1 {
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+#landing-logo {
+    margin-top: 24px;
+}
+
+#landing p {
+    max-width: 300px;
+    padding: 16px;
+    color: white;
+    text-align: justify;
+}
+
+#landing-nav-list {
+    list-style: none;
+    color: white;
+    margin: 32px 0;
+}
+
+#landing-nav-list a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+}
+
+#landing-nav-list li {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#landing-nav-list li:hover {
+    background-color: #334c89;
+}
+
+/* headings */
+
+h1 {
+    color: white;
+    font-size: 20px;
+    padding: 32px 16px 16px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: inherit;
+    font-style: italic;
+}
+
+a {
+    color: #326bb7;
+}
+
+/* header and footer */
+
+header,
+footer {
+    padding: 16px 32px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+footer {
+    border-top: 1px solid #dfdfdf;
+}
+
+#logo {
+    display: block;
+}
+
+/* @media screen and (max-width:330px) {
+
+    header {
+        justify-content: flex-end;
+    }
+
+    #logo {
+        display: none;
+    }
+
+} */
+
+.spaced {
+    margin-left: 32px;
+}
+
+#user-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#user-menu i {
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+#user-name {
+    text-transform: capitalize;
+}
+
+#menu-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* sidebar nav */
+
+#sidebar-container {
+    background-color: rgba(20, 20, 20, 0.7);
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    visibility: hidden;
+}
+
+#sidebar {
+    height: 100vh;
+    width: 300px;
+    background-color: #326bb7;
+    color: white;
+    float: right;
+    right: -300px;
+    position: relative;
+    transition: .2s ease-in;
+    visibility: hidden;
+}
+
+.sidebar-open {
+    transform: translate(-300px, 0);
+    visibility: visible !important;
+}
+
+.sidebar-closed {
+    transform: translate(300px, 0);
+}
+
+#close-menu {
+    float: right;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+}
+
+.x-close {
+    font-size: 24px;
+    padding-left: 10px;
+}
+
+.nav-heading {
+    margin: 16px 0 32px 0;
+    font-size: 32px;
+    clear: right;
+    padding: 32px 16px 16px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#sidebar li {
+    width: 100%;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#sidebar li:hover {
+    background-color: #334c89;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+}
+
+.active-nav {
+    border-left: 4px solid white;
+}
+
+/* main content */
+
+#background {
+    background: linear-gradient(180deg, #326bb7 120px, #326bb7 120px, white 120px);
+    flex-grow: 1;
+}
+
+#main-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.box {
+    border-radius: 4px;
+    border: 1px solid #dfdfdf;
+    margin: 0 16px 16px;
+    padding: 16px;
+    background-color: white;
+}
+
+/* pay day calculator form */
+
+#form-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+input[type=number] {
+    width: 60px;
+}
+
+.about-box {
+    min-width: 45%;
+}
+
+#calendar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.week {
+    background-color: #326bb7;
+    padding: 16px;
+    border-radius: 4px;
+    color: white;
+    width: 100%;
+}
+
+@media screen and (min-width:500px) {
+    .week {
+        width: 48%;
+    }
+}
+
+@media screen and (min-width:875px) {
+    .week {
+        width: 23.5%;
+    }
+}
+
+.week h2 {
+    text-align: center;
+}
+
+.week-table {
+    width: 100%;
+}
+
+.week-table th {
+    text-align: left;
+}
+
+.week-table th:nth-of-type(2),
+.week-table td:nth-of-type(2) {
+    text-align: right;
+}
+
+.week-table tr td:nth-of-type(1) {
+    font-size: 12px;
+}
+
+.buttons {
+    padding: 0 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.center-button {
+    justify-content: center;
+}
+
+button {
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid #dfdfdf;
+    cursor: pointer;
+    padding: 16px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #282828;
+}
+
+button:active {
+    background-color: #326bb7;
+    border: 1px solid #326bb7;
+    color: white;
+}
+
+@media (hover: hover) {
+    button:hover {
+        background-color: #326bb7;
+        border: 1px solid #326bb7;
+        color: white;
+    }
+}
+
+/* results div */
+
+#results {
+    display: none;
+}
+
+.results {
+    font-weight: bold;
+}
+
+/* problems.html */
+
+.bullet-list li {
+    margin-left: 16px;
+}
+
+.contents {
+    list-style: none;
+    border-left: 4px solid #6285b4;
+}
+
+/* understand.html */
+
+.countdown {
+    text-align: center;
+    vertical-align: middle;
+    padding: 16px 0;
+    line-height: 1.5;
+}
+
+.big {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.payments {
+    font-size: 13px;
+    width: 100%;
+}
+
+.payments tr:nth-child(even) {
+    background-color: #dfdfdf;
+}
+
+.payments tr:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+.payments td {
+    padding: 4px 8px;
+}
+
+.payments tr td {
+    vertical-align: top;
+}
+
+.payments tr td:nth-of-type(1) {
+    width: 20%;
+    font-weight: bold;
+}
+
+summary {
+    background-color: #326bb7;
+    color: white;
+    border-radius: 3px;
+    padding-left: 8px;
+}
+
+details {
+    background-color: #dfdfdf;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-weight: bold;
+}
+
+details li {
+    list-style: none;
+}
+
+/* quiz.html */
+
+#question {
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.option {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #dfdfdf;
+    margin-bottom: 16px;
+}
+
+.option-hover:hover {
+    cursor: pointer;
+    background-color: #326bb7;
+    color: white;
+}
+
+.correct-answer {
+    background-color: green;
+    color: white;
+}
+
+.correct-answer::before {
+    content: "CORRECT! - ";
+}
+
+.incorrect-answer {
+    background-color: red;
+    color: white;
+}
+
+.incorrect-answer::before {
+    content: "INCORRECT! - ";
+}
+
+#quiz-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
+#score {
+    display: none;
+    text-align: center;
+    background-color: #326bb7;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 0 16px;
+    color: white;
+}
+
+.score-box {
+    border: 1px solid black;
+    border-radius: 4px;
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+}
+
+.score-box-correct {
+    background-color: green;
+}
+
+.score-box-incorrect {
+    background-color: red;
+}
+
+#quiz-tracker {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#restart-button,
+#next-button,
+#quiz-container {
+    display: none;
+}
+
+.quiz-button {
+    margin: 16px auto;
+}
+
+/* back to top button */
+
+#top-button {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 99;
+    border: none;
+    color: white;
+    background-color: #6285b4;
+    border: 2px solid #6285b4;
+}
+
+#top-button:hover {
+    background-color: white;
+    color: #6285b4;
+}
+
+/* error pages */
+
+.back-a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* task list */
+
+.task-info {
+    color: red;
+}
+
+.hand-date {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.handover-photo {
+    width: 100%;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+
+.read-btn {
+    margin-top: 15px;
+}
+
+.handover-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-summary {
+    background-color: white;
+    color: #282828;
+    border: 1px solid #dfdfdf;
+    border-radius: 3px;
+}
+
+.task-details {
+    margin-bottom: 5px;
+}
+
+.overdue {
+    color: red;
+}
+
+.day-list {
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.cal table {
+    width: 100%;
+}
+
+.cal table th,
+.cal table td {
+    width: 14%;
+}
+
+.cal table tbody tr th:first-of-type[colspan="7"] {
+    text-align: center;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.date {
+    color: #282828;
+}
+
+.today-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 16px;
+}
+
+.event-table tr td:first-of-type {
+    width: 25%;
+}
+
+.event-table {
+    width: 100%;
+}
+
+.handoverphoto:first-of-type {
+    padding-bottom: 5px !important;
+}
+
+.handoverphoto:last-of-type {
+    padding-top: 5px !important;
+}

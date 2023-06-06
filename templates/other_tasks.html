@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load app_extras %}
+{% block title %}
+Other Tasks
+{% endblock%}
+{% block content %}
+<div id="main-content">
+
+
+    <h1>Other Tasks</h1>
+    <div class="box">
+        <div class="handover-btns"><a href="{% url 'new_other_task' %}"><button><i class="fa-solid fa-plus"></i> Add New Task</button></a><a href="{% url 'tasks' %}"><button><i class="fa-solid fa-calendar"></i> Daily Tasks</button></a></div>
+    </div>
+    <div class="box">
+        {% if overdue_tasks %}
+        <h2 class="overdue">OVERDUE:</h2>
+        {% for task in overdue_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }} - <span class="overdue">{{ task.due }}</span>
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.photo %}
+                <a href="{{ task.photo.url }}"><img src="{{ task.photo.url }}" class="handover-photo"></a>
+                {% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_other_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_other' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ There are no overdue tasks!
+        {% endif %}
+    </div>
+    <div class="box">      
+        <h2>To do:</h2>
+        {% if other_tasks %}
+        {% for task in other_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}{% if task.due %} - {{ task.due }}{% endif %}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.photo %}
+                <a href="{{ task.photo.url }}"><img src="{{ task.photo.url }}" class="handover-photo"></a>
+                {% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_other_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_other' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All tasks are complete!
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

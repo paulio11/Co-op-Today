@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load app_extras %}
+{% block title %}
+Today
+{% endblock%}
+{% block content %}
+<div id="main-content">
+    <div class="today-title">
+        <h1>{{ date | date:'l jS M'}}</h1>
+        <!-- <a href="{% url 'handover' %}"><button style="height: 60px;"><i class="fa-solid fa-hand"></i> Read Handover</button></a> -->
+    </div>
+
+    {% if lasthandover %}
+    <div class="box">
+        {% for handover in lasthandover %} 
+        <strong>Handover from {{ handover.user.first_name }}:</strong>
+        <p>{{ handover.message | linebreaksbr }}</p>
+        {% if handover.photo or handover.photo2 or handover.photo3%}
+        <details class="task-details">
+            <summary class="p-2 task-summary">
+                Tap to see photos
+            </summary>
+            {% if handover.photo %}
+            <img src="{{ handover.photo.url }}" alt="" width="100%" class="handoverphoto">
+            {% endif %}
+            {% if handover.photo2 %}
+            <img src="{{ handover.photo2.url }}" alt="" width="100%" class="handoverphoto">
+            {% endif %}
+            {% if handover.photo3 %}
+            <img src="{{ handover.photo3.url }}" alt="" width="100%" class="handoverphoto">
+            {% endif %}
+        </details>
+        {% endif %}
+        <a href="{% url 'mark_read' handover.id %}"><button>Clear message</button></a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="box">
+        <h2>Today's Schedule</h2>
+        {% if events %}
+            <table class="event-table">
+                {% for event in events %}
+                <tr>
+                    {% if event.time %}
+                    <td><strong>{{ event.time }}</strong></td>
+                    {% else %}
+                    <td><strong>All Day.</strong></td>
+                    {% endif %}
+                    <td>{{ event.title }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            ✅ There is nothing scheduled for today!
+        {% endif %}
+    </div>
+
+    <div class="box">
+        <h2>Today's Tasks</h2>
+        {% if dailytasks or other_tasks %}
+        {% for task in dailytasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                <div class="mt-2">
+                    {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                </div>
+            </div>
+        </details>
+        {% endfor %}
+        {% if other_tasks and dailytasks %}
+        <hr>
+        {% endif %}
+        {% for task in other_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.photo %}
+                <div>
+                    <img src="{{ task.photo.url }}" width="100%">
+                </div>
+                {% endif %}
+                {% if task.done is False %}
+                <div class="mt-2">
+                    <a href="{% url 'mark_other_done' task.id %}"><button>Mark task complete</button></a>
+                </div>
+                {% endif %}
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of today's tasks are complete!
+        {% endif %}
+    </div>
+
+    <div class="box">
+        <h2 class="overdue">Overdue Tasks</h2>
+        {% if overdue_tasks or missed_daily %}
+        {% for task in overdue_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p><span>{{ task.description }}</span></p>{% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_other_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+            </div>
+        </details>
+        {% endfor %}
+        {% for task in missed_daily %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p><span>{{ task.description }}</span></p>{% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ There are no overdue tasks!
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

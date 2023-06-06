@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load app_extras %}
+{% block title %}
+Daily Tasks
+{% endblock%}
+{% block content %}
+<div id="main-content">
+
+
+    <h1>Daily Tasks</h1>
+    <div class="box">
+        <div class="handover-btns"><a href="{% url 'new_task' %}"><button><i class="fa-solid fa-plus"></i> Add Daily Task</button></a><a href="{% url 'other_tasks' %}"><button><i class="fa-solid fa-list-check"></i> Other Tasks</button></a></div>
+    </div>
+    <div class="box">
+        <ul class="bullet-list contents day-list">
+            <li><a href="#sunday">Sunday</a></li>
+            <li><a href="#monday">Monday</a></li>
+            <li><a href="#tuesday">Tuesday</a></li>
+            <li><a href="#wednesday">Wednesday</a></li>
+            <li><a href="#thursday">Thursday</a></li>
+            <li><a href="#friday">Friday</a></li>
+            <li><a href="#saturday">Saturday</a></li>
+        </ul>
+    </div>
+    <div class="box" id="sunday">
+        <h2>Sunday</h2>
+        {% if sun_tasks %}
+        {% for task in sun_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Sunday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box" id="monday">
+        <h2>Monday</h2>
+        {% if mon_tasks %}
+        {% for task in mon_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Monday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box" id="tuesday">
+        <h2>Tuesday</h2>
+        {% if tue_tasks %}
+        {% for task in tue_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Tuesday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box" id="wednesday">
+        <h2>Wednesday</h2>
+        {% if wed_tasks %}
+        {% for task in wed_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Wednesday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box" id="thursday">
+        <h2>Thursday</h2>
+        {% if thu_tasks %}
+        {% for task in thu_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Thursday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box" id="friday">
+        <h2>Friday</h2>
+        {% if fri_tasks %}
+        {% for task in fri_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Friday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box" id="saturday">
+        <h2>Saturday</h2>
+        {% if sat_tasks %}
+        {% for task in sat_tasks %}
+        <details class="task-details" style="background-color: #f1f1f1;"}>
+            <summary class="p-2 task-summary">
+                {{ task.name }}
+            </summary>
+            <div class="p-2">
+                {% if task.due %}<p><strong>Due <span class="task-info">{{ task.due }}</span></strong></p>{% endif %}
+                {% if task.assigned_to %}<p><strong>Assigned to <span class="task-info">{{ task.assigned_to }}</span></strong></p>{% endif %}
+                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                {% if task.done %}
+                <p><i class="fa-solid fa-check"></i> This task is done.</p>
+                {% else %}
+                <p><i class="fa-solid fa-xmark"></i> This task still to do.</p>
+                {% endif %}
+                {% if task.done is False %}<a href="{% url 'mark_done' task.id %}"><button>Mark task complete</button></a>{% endif %}
+                <p class="mt-2"><a href="{% url 'edit_task' task.pk %}">Edit this task</a></p>
+            </div>
+        </details>
+        {% endfor %}
+        {% else %}
+        ✅ All of Saturday's tasks are complete!
+        {% endif %}
+    </div>
+    <div class="box">
+        <a href="{% url 'reset' %}"><button>Reset tasks</button></a>
+    </div>
+</div>
+
+{% endblock %}

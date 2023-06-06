@@ -1,0 +1,80 @@
+{% load static %}
+{% load app_extras %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'images/co-oplogo.png' %}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <!-- scroll to top button -->
+    <button id="top-button"><i class="fa-solid fa-arrow-up"></i></button>
+    <!-- overlay start -->
+    <div id="sidebar-container">
+        <!-- sidebar start -->
+        <nav id="sidebar">
+            <span id="close-menu">Close menu <i class="fa-regular fa-circle-xmark x-close"></i></span>
+            {% if request.user.is_authenticated %}
+            <h2 class="nav-heading">Hello {{ request.user.first_name }}</h2>
+            {% else %}
+            <h2 class="nav-heading">Main menu</h2>
+            {% endif %}
+            <ul>
+                {% if request.user.is_authenticated %}
+                <li class="{% if request.resolver_match.view_name == 'today' %}active-nav{% endif %}"><a href="{% url 'today' %}">Today</a></li>
+                <li class="{% if request.resolver_match.view_name == 'handover' %}active-nav{% endif %}"><a href="{% url 'handover' %}">Handover</a></li>
+                <li class="{% if request.resolver_match.view_name == 'calendar' %}active-nav{% endif %}"><a id="cal-link" href="#">Calendar</a></li>
+                <li class="{% if request.resolver_match.view_name == 'tasks' %}active-nav{% endif %}"><a href="{% url 'tasks' %}">Daily Tasks</a></li>
+                <li class="{% if request.resolver_match.view_name == 'other_tasks' %}active-nav{% endif %}"><a href="{% url 'other_tasks' %}">Other Tasks ({% other_notdone %})</a></li>
+                <li><a href="https://shifts.coop.co.uk/" target="_blank"><i class="fa-solid fa-clock"></i> Shifts</a></li>
+                <li><a href="https://live.microlise.com/COOP/TMCWebPortal/authentication/login.aspx?ReturnUrl=%2fCOOP%2fTMCWebPortal%2fSite%2fVisits%2f35145%3fsiteIdEncoded%3dFalse&siteIdEncoded=False" target="_blank"><i class="fa-solid fa-truck"></i> Delivery Time</a></li>
+                <li><a href="https://eam.verisae.co.uk/DataNett/mobile/mlogin.html" target="_blank"><i class="fa-solid fa-screwdriver-wrench"></i> Verisae</a></li>
+                <!-- <li class="{% if request.resolver_match.view_name == 'change_password' %}active-nav{% endif %}"><a href="{% url 'password' %}">Change Password</a></li> -->
+                {% if request.user.is_superuser %}
+                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                {% endif %}
+                {% else %}
+                <li class="{% if request.resolver_match.view_name == 'login_view' %}active-nav{% endif %}"><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <!-- sidebar end -->
+    </div>
+    <!-- overlay end -->
+    <header>
+        <a href="{% url 'index' %}"><img src="{% static 'images/coop-logo.svg' %}" id="logo" alt="coop logo" width="32"
+                height="32"></a>
+        <div id="user-menu">
+            <div id="menu-button">
+                <span class="spaced">Menu</span>
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <div id="background">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- <footer>
+        <span>Footer.</span>
+    </footer> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- font awesome script -->
+    <script src="https://kit.fontawesome.com/9446ef5fe5.js" crossorigin="anonymous"></script>
+    <!-- sidebar menu behaviour script -->
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/top.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

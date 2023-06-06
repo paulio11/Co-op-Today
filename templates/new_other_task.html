@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+New Task
+{% endblock%}
+{% block content %}
+<div id="main-content">
+    <h1>Add Task</h1>
+    <div class="box">
+        {% if request.user.is_authenticated %}
+        <form method="POST" enctype="multipart/form-data">
+            {{ form | crispy }}
+            {% csrf_token %}
+            <button type="submit">Add task</button>
+        </form>
+        {% else %}
+        <p><a href="">Login</a> to make a new task.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

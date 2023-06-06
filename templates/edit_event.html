@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Edit Event
+{% endblock%}
+{% block content %}
+<div id="main-content">
+    <h1>Edit Event</h1>
+    <div class="box">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form | crispy }}
+            {% csrf_token %}
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

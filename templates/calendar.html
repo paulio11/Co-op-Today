@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load app_extras %}
+{% block title %}
+Calendar
+{% endblock%}
+{% block content %}
+<div id="main-content">
+    <h1>Calendar</h1>
+    <div class="box">
+        <div class="handover-btns">
+            <a href="{% url 'new_event' %}"><button><i class="fa-solid fa-plus"></i> New Event</button></a>
+            <div>
+                <button id="back-btn"><i class="fa-solid fa-backward"></i></button>
+                <button id="fwd-btn"><i class="fa-solid fa-forward"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="cal">{{ cal | safe }}</div>
+    </div>
+    <div class="box">
+        <h2>This Month's Events</h2>
+        {% if events %}
+        <hr>
+        {% else %}
+        ✅ There are no scheduled events this month!
+        {% endif %}
+        {% for event in events %}
+        <details class="task-details">
+            <summary class="p-2 task-summary">
+                <strong>{{ event.date | date:'D d' }}</strong> - {{ event.title }}
+            </summary>
+            <div class="p-2">
+                {% if event.time %}
+                <p>Time: {{ event.time }}</p>
+                {% endif %}
+                {% if event.description %}
+                    <p>{{ event.description }}</p>
+                {% endif %}
+                <p class="mt-2"><a href="{% url 'edit_event' event.pk %}">Edit</a></p>
+                <p class="mt-2"><a href="{% url 'del_event' event.id %}">Delete</a></p>
+            </div>
+            
+        </details>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

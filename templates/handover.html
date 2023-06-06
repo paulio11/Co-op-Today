@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load app_extras %}
+{% block title %}
+Handover
+{% endblock%}
+{% block content %}
+<div id="main-content">
+
+    <h1>Handover</h1>
+    <div class="box">
+        <div class="handover-btns"><a href="{% url 'old_handovers' %}"><button><i class="fa-solid fa-box-archive"></i> Old Handovers</button></a><a href="{% url 'new_handover' %}"><button><i class="fa-solid fa-plus"></i> New Handover</button></a></div>
+    </div>
+    {% if unread %}
+    {% for handover in unread %}
+    <div class="box">
+        <h2 class="hand-date">Handover for {{ handover.date }}</h2>
+        <h2>Message from {{ handover.user.first_name }}</h2>        
+        {{ handover.message | linebreaksbr }}
+        <div>
+            {% if handover.photo %}
+            <a href="{{ handover.photo.url }}"><img src="{{ handover.photo.url }}" class="handover-photo"></a>
+            {% endif %}
+            {% if handover.photo2 %}
+            <a href="{{ handover.photo2.url }}"><img src="{{ handover.photo2.url }}" class="handover-photo"></a>
+            {% endif %}
+            {% if handover.photo3 %}
+            <a href="{{ handover.photo3.url }}"><img src="{{ handover.photo3.url }}" class="handover-photo"></a>
+            {% endif %}
+        </div>
+        <a href="{% url 'mark_read' handover.id %}"><button class="read-btn">Mark as read</button></a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="box">
+        <h2>There are no unread handover messages</h2>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
