@@ -1,5 +1,7 @@
 # Co-op-Today
 
+**A new version built using React can be viewed [here](https://github.com/paulio11/Co-op-Today-React).**
+
 I built this mobile web-app in a few hours as a concept. It has the following functionality:
 
 -   Display a list of tasks for the current day
